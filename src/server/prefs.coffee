@@ -5,6 +5,7 @@ BonusMine = require './bonusMine'
 BonusGrenade = require './bonusGrenade'
 BonusTracker = require './bonusTracker'
 BonusStealth = require './bonusStealth'
+BonusTeleportation = require './bonusTeleportation'
 BonusEMP = require './bonusEMP'
 
 class ServerPreferences
@@ -336,6 +337,26 @@ class GamePreferences
 				countdown: null
 				next: null
 
+	teleportation:
+
+		# Sensibility radius.
+		minDetectionRadius: 30
+		maxDetectionRadius: 50
+
+		# Speed of wave.
+		waveSpeed: 0.5
+
+		states:
+			'inactive':
+				countdown: 0
+				next: 'active'
+			'active':
+				countdown: 5000000
+				next: 'disapear'
+			'disapear':
+				countdown: null
+				next: null
+		
 	grenade:
 
 		radius: 4
@@ -421,7 +442,10 @@ class GamePreferences
 		mine:
 			# Number of held mines.
 			mineCount: 2
-
+		
+		teleportation:
+			teleportationCount: 1
+			
 		boost:
 			# Initial speed multiplier.
 			boostFactor: 2
@@ -459,6 +483,9 @@ class GamePreferences
 				weight: 1
 			stealth:
 				class: BonusStealth
+				weight: 1
+			teleportation:
+				class: BonusTeleportation
 				weight: 1
 
 exports.ServerPreferences = ServerPreferences

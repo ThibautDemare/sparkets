@@ -138,5 +138,5 @@ class Tracker extends ChangingObject
 		@game.events.push
 			type: 'tracker exploded'
 			id: @id
-
+	
 exports.Tracker = Tracker

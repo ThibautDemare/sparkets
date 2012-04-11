@@ -351,6 +351,8 @@ class Client
 				new Rope(@, obj)
 			when 'tracker'
 				new Tracker(@, obj)
+			when 'teleportation'
+				new Teleportation(@, obj)
 
 	deleteObject: (id) ->
 		type = @gameObjects[id].type
@@ -479,6 +481,10 @@ class Client
 
 			when 'EMP exploded'
 				@gameObjects[event.id].wavesEffect()
+			
+			when 'teleportation'
+				# Draw scene.
+				@redraw(@ctxt)
 
 	# When a player sent a chat message.
 	onPlayerMessage: (data)->

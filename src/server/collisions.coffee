@@ -214,6 +214,17 @@ exports.handle = (obj1, obj2) ->
 	else if exports.collisions[type2]?
 		exports.collisions[type2](obj2, obj1)
 
+exports.teleportation =
+	(obj, teleportation) ->
+		obj.pos.x = teleportation.target.targetX
+		obj.pos.y = teleportation.target.targetY
+		# Update bounding box position.
+		obj.boundingBox.x = obj.pos.x
+		obj.boundingBox.y = obj.pos.y
+		obj.game.events.push
+			type: 'teleportation'
+			id: obj.id
+			
 exports.collisions =
 	'ship-bonus': (ship, bonus) ->
 		if bonus.state is 'available'
@@ -585,3 +596,41 @@ exports.collisions =
 		shield.cancel()
 
 		ddebug "EMP ##{emp.id} cancelled shield ##{shield.id}"
+	
+	'teleportation-ship': (teleportation, ship) ->
+		#teleportation of the ship
+		if teleportation.state is 'active'
+			exports.teleportation(ship, teleportation)
+	
+	'teleportation-tracker': (teleportation, tracker) ->
+		#teleportation of the tracker
+		if teleportation.state is 'active'
+			exports.teleportation(tracker, teleportation)
+		
+	'teleportation-grenade': (teleportation, grenade) ->
+		#teleportation of the grenade
+		if teleportation.state is 'active'
+			exports.teleportation(grenade.teleportation)
+	
+	'teleportation-bullet': (teleportation, bullet) ->
+		#teleportation o the bullet
+		if teleportation.state is 'active'
+			exports.teleportation(bullet, teleportation)
+	
+	'teleportation-shield': (teleportation, shield) ->
+		#teleportation of the ship and of the shield
+		if teleportation.state is 'active'
+			exports.teleportation(shield.owner, teleportation)
+	
+	'teleportation-bonus': (teleportation, bonus) ->
+		#teleportation of the bonus
+		if teleportation.state is 'active'
+			exports.teleportation(bonus, teleportation)
+	
+	'teleportation-mine': (teleportation, mine) ->
+		#teleportation of the mine
+		if teleportation.state is 'active'
+			exports.teleportation(mine, teleportation)
+		
+	#no teleportation of moon, planet, and rope
+

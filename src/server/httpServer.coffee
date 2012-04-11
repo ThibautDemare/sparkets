@@ -47,6 +47,8 @@ webFiles = {
 	'/js/client/shield.js',
 	'/js/client/ship.js',
 	'/js/client/spriteManager.js',
+	'/js/client/teleportation.js',
+	'/js/client/teleportationEffect.js',
 	'/js/client/tooltip.js',
 	'/js/client/tracker.js',
 	'/js/client/trailEffect.js',

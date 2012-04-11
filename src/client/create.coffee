@@ -108,7 +108,10 @@ $(document).ready () ->
 
 	window.bonusBoxes.push new BonusBox(cell, 'bonus.bonusType.grenade.weight', 'bonusGrenade')
 	new Tooltip(bonus(7), 'Grenade blablablaaa')
-
+	
+	window.bonusBoxes.push new BonusBox(cell, 'bonus.bonusType.teleportation.weight', 'bonusTeleportation')
+	new Tooltip(bonus(8), 'Teleportation blablablaaa')
+	
 	new Range(entry('#panel3 > table', 'Drop wait'),
 		'bonus.waitTime', 1000, 10000, 1000, 5000, ' milliseconds')
 	new Tooltip(label(3, 2), 'blabla')

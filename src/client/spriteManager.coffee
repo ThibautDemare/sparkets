@@ -109,6 +109,18 @@ class SpriteManager
 
 			return sprite
 
+		'teleportation': (sprite, w, h) ->
+			ctxt = sprite.getContext('2d')
+			ctxt.fillStyle = 'black'
+			
+			r = w / Math.sqrt(2) / 2
+			ctxt.save()
+			ctxt.translate(sprite.width/2, sprite.height/2)
+			ctxt.fillRect(-r, -r, r*2, r*2)
+			ctxt.restore()
+			
+			return sprite
+
 		'grenade': (sprite, w, h) ->
 			ctxt = sprite.getContext('2d')
 			ctxt.fillStyle = 'black'
@@ -177,6 +189,9 @@ class SpriteManager
 
 		'bonusMine': (sprite, w, h) ->
 			@['mine'](sprite, w, h)
+
+		'bonusTeleportation': (sprite, w, h) ->
+			@['teleportation'](sprite, w, h)
 
 		'bonusGrenade': (sprite, w, h) ->
 			@['grenade'](sprite, w, h)
