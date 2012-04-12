@@ -482,8 +482,8 @@ class Client
 			when 'EMP exploded'
 				@gameObjects[event.id].wavesEffect()
 			
-			when 'teleportation'
-				@gameObjects[event.id].teleportationEffect()
+#			when 'teleportation'
+#				@gameObjects[event.id].teleportationEffect()
 				
 	# When a player sent a chat message.
 	onPlayerMessage: (data)->

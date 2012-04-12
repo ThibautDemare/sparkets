@@ -115,7 +115,6 @@ class SpriteManager
 			ctxt.lineWidth = 3
 			
 			r = w / Math.sqrt(2) / 2
-			console.log(""+r)
 			ctxt.save()
 			ctxt.translate(sprite.width/2, sprite.height/2)
 			ctxt.scale(0.75, 1);#in order to draw an ellipse with the arc function

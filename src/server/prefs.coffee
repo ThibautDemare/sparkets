@@ -340,11 +340,11 @@ class GamePreferences
 	teleportation:
 
 		# Sensibility radius.
-		minDetectionRadius: 30
-		maxDetectionRadius: 50
+		minDetectionRadius: 10
+		maxDetectionRadius: 40
 
 		# Speed of wave.
-		waveSpeed: 0.5
+		waveSpeed: 1
 
 		states:
 			'inactive':

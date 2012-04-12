@@ -31,23 +31,25 @@ class Teleportation
 		ctxt.drawImage(@sprite, -@sprite.width/2, -@sprite.height/2)
 		ctxt.restore()
 
-		# Draw the sensor wave when the teleportation is active.
+		# Draw the animation when the teleportation is active.
 		if @state is 'active'
-			for r in [@radius...0] by -20
+			for r in [@externRadius...@internRadius] by -1
 				ctxt.save()
-				ctxt.lineWidth = 3
-				ctxt.strokeStyle = utils.color(@color, 1-r/50)
+				ctxt.lineWidth = 2
+				ctxt.strokeStyle = utils.color(@color, 1-(@externRadius-r)/100)
 				ctxt.translate(@pos.x, @pos.y)
+				ctxt.scale(0.75, 1);#in order to draw an ellipse with the arc function
 				ctxt.beginPath()
 				ctxt.arc(0, 0, r, 0, 2*Math.PI, false)
 				ctxt.stroke()
 				ctxt.restore()
+				
 
 	inView: (offset = {x:0, y:0}) ->
-		@client.boxInView(@pos.x + offset.x, @pos.y + offset.y, @radius)
+		@client.boxInView(@pos.x + offset.x, @pos.y + offset.y, @externRadius)
 
-	teleportationEffect: () ->
-		@client.effects.push new TeleportationEffect(@client, @pos, 80, @color, 500)
+#	teleportationEffect: () ->
+#		@client.effects.push new TeleportationEffect(@client, @pos, 80, @color, 500)
 
 # Exports
 window.Teleportation = Teleportation

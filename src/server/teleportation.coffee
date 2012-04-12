@@ -14,7 +14,8 @@ class Teleportation extends ChangingObject
 		@flagFullUpdate('ownerId')
 		@flagFullUpdate('pos')
 		@flagFullUpdate('state')
-		@flagFullUpdate('radius')
+		@flagFullUpdate('externRadius')
+		@flagFullUpdate('internRadius')
 		@flagFullUpdate('serverDelete')
 		if @game.prefs.debug.sendHitBoxes
 			@flagFullUpdate('boundingBox')
@@ -44,19 +45,22 @@ class Teleportation extends ChangingObject
 		@flagNextUpdate('target')
 		
 		# Hit box is a circle with static position and varying radius.
-		@radius = 0
-		@flagNextUpdate('radius')
+		@externRadius = 20
+		@flagNextUpdate('externRadius')
 
+		@internRadius = 10
+		@flagNextUpdate('internRadius')
+		
 		@boundingBox =
 			x: @pos.x
 			y: @pos.y
-			radius: @radius
+			radius: @externRadius
 
 		@hitBox =
 			type: 'circle'
 			x: @pos.x
 			y: @pos.y
-			radius: @radius
+			radius: @externRadius
 
 		if @game.prefs.debug.sendHitBoxes
 			@flagNextUpdate('boundingBox')
@@ -68,17 +72,22 @@ class Teleportation extends ChangingObject
 	move: (step) ->
 
 		switch @state
-
 			# The teleportation is active.
 			when 'active'
 				# FIXME: slower in powersave mode.
-				@radius += @game.prefs.mine.waveSpeed
-				if @radius >= @game.prefs.mine.maxDetectionRadius
-					@radius = @game.prefs.mine.minDetectionRadius
-				@flagNextUpdate('radius')
-
+				if @externRadius < @game.prefs.teleportation.maxDetectionRadius
+					@externRadius += @game.prefs.teleportation.waveSpeed
+				else
+					@externRadius = @game.prefs.teleportation.maxDetectionRadius
+				@flagNextUpdate('externRadius')
+				
+				@internRadius -= @game.prefs.teleportation.waveSpeed
+				if @internRadius < @game.prefs.teleportation.minDetectionRadius
+					@internRadius = @externRadius
+				@flagNextUpdate('internRadius')
+				
 		# Update hit box radius.
-		@boundingBox.radius = @hitBox.radius = @radius
+		@boundingBox.radius = @hitBox.radius = @externRadius
 		if @game.prefs.debug.sendHitBoxes
 			@flagNextUpdate('boundingBox.radius')
 			@flagNextUpdate('hitBox.radius')
