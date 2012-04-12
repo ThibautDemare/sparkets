@@ -63,7 +63,7 @@ class Teleportation extends ChangingObject
 			@flagNextUpdate('hitBox')
 	
 	tangible: () ->
-		@state is 'active' or @state is 'disapear'
+		@state is 'active' or @state is 'disappear'
 
 	move: (step) ->
 
@@ -89,7 +89,7 @@ class Teleportation extends ChangingObject
 
 		switch @state
 			# The teleportation is over.
-			when 'disapear'
+			when 'disappear'
 				@serverDelete = yes
 				@flagNextUpdate('serverDelete')
 

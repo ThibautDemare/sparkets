@@ -352,8 +352,8 @@ class GamePreferences
 				next: 'active'
 			'active':
 				countdown: 5000
-				next: 'disapear'
-			'disapear':
+				next: 'disappear'
+			'disappear':
 				countdown: null
 				next: null
 		
@@ -443,9 +443,6 @@ class GamePreferences
 			# Number of held mines.
 			mineCount: 2
 		
-		teleportation:
-			teleportationCount: 1
-			
 		boost:
 			# Initial speed multiplier.
 			boostFactor: 2
@@ -486,7 +483,7 @@ class GamePreferences
 				weight: 1
 			teleportation:
 				class: BonusTeleportation
-				weight: 100
+				weight: 1000
 
 exports.ServerPreferences = ServerPreferences
 exports.GamePreferences = GamePreferences

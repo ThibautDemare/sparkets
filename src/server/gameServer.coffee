@@ -16,7 +16,6 @@ class GameServer
 
 		@bullets = {}
 		@mines = {}
-		@teleportations = {}
 		@grenades = {}
 		@EMPs = {}
 		@trackers = {}

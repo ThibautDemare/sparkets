@@ -483,9 +483,8 @@ class Client
 				@gameObjects[event.id].wavesEffect()
 			
 			when 'teleportation'
-				# Draw scene.
-				@redraw(@ctxt)
-
+				@gameObjects[event.id].teleportationEffect()
+				
 	# When a player sent a chat message.
 	onPlayerMessage: (data)->
 		@chat.display(data)

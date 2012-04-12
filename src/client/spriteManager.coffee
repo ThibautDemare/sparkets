@@ -112,11 +112,21 @@ class SpriteManager
 		'teleportation': (sprite, w, h) ->
 			ctxt = sprite.getContext('2d')
 			ctxt.fillStyle = 'black'
+			ctxt.lineWidth = 3
 			
 			r = w / Math.sqrt(2) / 2
+			console.log(""+r)
 			ctxt.save()
 			ctxt.translate(sprite.width/2, sprite.height/2)
-			ctxt.fillRect(-r, -r, r*2, r*2)
+			ctxt.scale(0.75, 1);#in order to draw an ellipse with the arc function
+			ctxt.beginPath();
+			ctxt.arc(-sprite.width/4, 0, r, 0, Math.PI*2, false);#first ellipse
+			ctxt.stroke();
+			ctxt.closePath();
+			ctxt.beginPath();
+			ctxt.arc(sprite.width/4, 0, r, 0, Math.PI*2, false);#and the second
+			ctxt.stroke();
+			ctxt.closePath();
 			ctxt.restore()
 			
 			return sprite

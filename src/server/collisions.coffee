@@ -214,16 +214,16 @@ exports.handle = (obj1, obj2) ->
 	else if exports.collisions[type2]?
 		exports.collisions[type2](obj2, obj1)
 
-exports.teleportation =
-	(obj, teleportation) ->
-		obj.pos.x = teleportation.target.x
-		obj.pos.y = teleportation.target.y
-		# Update bounding box position.
-		obj.boundingBox.x = obj.pos.x
-		obj.boundingBox.y = obj.pos.y
-		obj.game.events.push
-			type: 'teleportation'
-			id: obj.id
+exports.teleportation = (obj, teleportation) ->
+	#Update the position
+	obj.pos.x = teleportation.target.x
+	obj.pos.y = teleportation.target.y
+	# Update bounding box position.
+	obj.boundingBox.x = obj.pos.x
+	obj.boundingBox.y = obj.pos.y
+	obj.game.events.push
+		type: 'teleportation'
+		id: obj.id
 			
 exports.collisions =
 	'ship-bonus': (ship, bonus) ->
@@ -610,7 +610,7 @@ exports.collisions =
 	'teleportation-grenade': (teleportation, grenade) ->
 		#teleportation of the grenade
 		if teleportation.state is 'active'
-			exports.teleportation(grenade.teleportation)
+			exports.teleportation(grenade, teleportation)
 	
 	'teleportation-bullet': (teleportation, bullet) ->
 		#teleportation o the bullet
