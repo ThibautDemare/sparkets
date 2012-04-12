@@ -351,7 +351,7 @@ class GamePreferences
 				countdown: 0
 				next: 'active'
 			'active':
-				countdown: 5000000
+				countdown: 5000
 				next: 'disapear'
 			'disapear':
 				countdown: null
@@ -468,7 +468,7 @@ class GamePreferences
 				weight: 1
 			grenade:
 				class: BonusGrenade
-				weight: 100
+				weight: 1
 			tracker:
 				class: BonusTracker
 				weight: 1
@@ -486,7 +486,7 @@ class GamePreferences
 				weight: 1
 			teleportation:
 				class: BonusTeleportation
-				weight: 1
+				weight: 100
 
 exports.ServerPreferences = ServerPreferences
 exports.GamePreferences = GamePreferences

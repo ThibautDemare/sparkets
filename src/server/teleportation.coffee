@@ -6,7 +6,7 @@ class Teleportation extends ChangingObject
 
 	stateMachineMixin.call(@prototype)
 
-	constructor: (@id, @game, @owner, @pos) ->
+	constructor: (@id, @game, @owner, @pos, @target) ->
 		super()
 
 		# Send these properties to new players.
@@ -38,13 +38,8 @@ class Teleportation extends ChangingObject
 
 		# Target position.
 		@target =
-			targetX: Math.random() * @game.prefs.mapSize
-			targetY: Math.random() * @game.prefs.mapSize
-
-		# Find a safe target location.
-		while @collideWithPlanet()
-			@target.targetX = Math.random() * @game.prefs.mapSize
-			@target.targetY = Math.random() * @game.prefs.mapSize
+			x: target.x
+			y: target.y
 
 		@flagNextUpdate('target')
 		
@@ -67,26 +62,6 @@ class Teleportation extends ChangingObject
 			@flagNextUpdate('boundingBox')
 			@flagNextUpdate('hitBox')
 	
-	collideWithPlanet: () ->
-		collidesWith = (p) ->
-			if p.type is 'moon'
-				x2 = p.planet.pos.x
-				y2 = p.planet.pos.y
-				r2 = p.dist + p.force
-			else
-				x2 = p.pos.x
-				y2 = p.pos.y
-				r2 = p.force
-			return (utils.distance(x, y, x2, y2) < r + r2)
-
-		x = @target.targetX
-		y = @target.targetY
-		r = @game.prefs.shield.planetAffectDistance
-
-		for id, planet of @planets
-			return true if collidesWith(planet)
-		return false
-
 	tangible: () ->
 		@state is 'active' or @state is 'disapear'
 

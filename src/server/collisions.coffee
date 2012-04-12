@@ -216,8 +216,8 @@ exports.handle = (obj1, obj2) ->
 
 exports.teleportation =
 	(obj, teleportation) ->
-		obj.pos.x = teleportation.target.targetX
-		obj.pos.y = teleportation.target.targetY
+		obj.pos.x = teleportation.target.x
+		obj.pos.y = teleportation.target.y
 		# Update bounding box position.
 		obj.boundingBox.x = obj.pos.x
 		obj.boundingBox.y = obj.pos.y
