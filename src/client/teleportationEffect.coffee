@@ -1,5 +1,5 @@
 class TeleportationEffect
-	constructor: (@client, @pos, color, @density = 100, @bitSize = 10, @speed = 1) ->
+	constructor: (@client, @pos, color, @density = 50, @bitSize = 10, @speed = 1) ->
 		@init()
 
 		# Copy color array since we will modify it.
@@ -62,8 +62,13 @@ class TeleportationEffect
 		for b in @bits
 			if @client.inView(b.x + offset.x, b.y + offset.y)
 				if b.life > 0
+					ctxt.beginPath()
+					ctxt.strokeStyle = utils.color(@color, b.life / (1.5 * b.lifeMax))
 					ctxt.fillStyle = utils.color(@color, b.life / (1.5 * b.lifeMax))
-					ctxt.fillRect(b.x, b.y, b.size, b.size)
+					ctxt.arc(b.x, b.y, b.size, 0, 2*Math.PI, true)
+					ctxt.closePath()
+					ctxt.stroke()
+					ctxt.fill()
 
 		true
 

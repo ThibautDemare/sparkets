@@ -48,8 +48,5 @@ class Teleportation
 	inView: (offset = {x:0, y:0}) ->
 		@client.boxInView(@pos.x + offset.x, @pos.y + offset.y, @externRadius)
 
-#	teleportationEffect: () ->
-#		@client.effects.push new TeleportationEffect(@client, @pos, 80, @color, 500)
-
 # Exports
 window.Teleportation = Teleportation

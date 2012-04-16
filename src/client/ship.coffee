@@ -207,5 +207,8 @@ class Ship
 		staticPos = {x: @pos.x, y: @pos.y}
 		@client.effects.push new FlashEffect(@client, staticPos, 300, @color, 600)
 
+	teleportationEffect: () ->
+		@client.effects.push new TeleportationEffect(@client, @pos, @color, 50, 5, 1)
+
 # Exports
 window.Ship = Ship
