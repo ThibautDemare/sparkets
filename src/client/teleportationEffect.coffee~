@@ -27,8 +27,8 @@ class TeleportationEffect
 			if Math.random >0.5
 				angle = (Math.random()+0.95)*@dir
 			else
-				angle = (Math.random()*1.05)*@dir
-			console.log("dir ="+@dir+" et angle ="+angle)
+				angle = (Math.random()*(1.05)*@dir
+			#console.log("dir ="+@dir+" et angle ="+angle)
 			particle.vx *= Math.abs(Math.cos angle)
 			particle.vy *= Math.abs(Math.sin angle)
 
