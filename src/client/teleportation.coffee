@@ -36,7 +36,7 @@ class Teleportation
 			for r in [@externRadius...@internRadius] by -1
 				ctxt.save()
 				ctxt.lineWidth = 2
-				ctxt.strokeStyle = utils.color(@color, 1-(@externRadius-r)/100)
+				ctxt.strokeStyle = utils.color(@color, 1-(r)/@externRadius)
 				ctxt.translate(@pos.x, @pos.y)
 				ctxt.scale(0.75, 1);#in order to draw an ellipse with the arc function
 				ctxt.beginPath()

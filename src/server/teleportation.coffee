@@ -51,6 +51,9 @@ class Teleportation extends ChangingObject
 		@internRadius = 10
 		@flagNextUpdate('internRadius')
 		
+		@direction = 1
+		@flagNextUpdate('direction')
+		
 		@boundingBox =
 			x: @pos.x
 			y: @pos.y
@@ -81,9 +84,10 @@ class Teleportation extends ChangingObject
 					@externRadius = @game.prefs.teleportation.maxDetectionRadius
 				@flagNextUpdate('externRadius')
 				
-				@internRadius -= @game.prefs.teleportation.waveSpeed
-				if @internRadius < @game.prefs.teleportation.minDetectionRadius
-					@internRadius = @externRadius
+				@internRadius -= @direction*@game.prefs.teleportation.waveSpeed
+				if @internRadius < @game.prefs.teleportation.minDetectionRadius or @internRadius > @game.prefs.teleportation.maxDetectionRadius
+					@direction = -1*@direction
+					@flagNextUpdate('direction')
 				@flagNextUpdate('internRadius')
 				
 		# Update hit box radius.
